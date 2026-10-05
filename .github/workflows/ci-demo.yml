@@ -1,0 +1,30 @@
+name: CI/CD Demo Pipeline
+
+on:
+  push:
+    branches: [ main, new-feature ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Run test step
+        run: |
+          echo "Запуск тестового шага..."
+          echo "Тесты пройдены ✅"
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Simulate build
+        run: |
+          echo "Начинаем сборку..."
+          sleep 3
+          echo "Сборка завершена ✅"
